@@ -24,8 +24,8 @@ python app.py
 Use [PyInstaller](https://pyinstaller.org/) to build a standalone executable:
 ```bash
 pip install pyinstaller
-pyinstaller --onefile app.py
+pyinstaller --onefile --windowed app.py
 ```
-The executable will appear in the `dist` folder.
+The executable will appear in the `dist` folder as `app.exe`. Double-click it to launch the GUI.
 ## Notes
 This project captures system-wide audio using loopback recording. To record audio from a specific application window, additional configuration or virtual audio routing may be required.

@@ -6,8 +6,7 @@ from datetime import datetime
 import numpy as np
 import PySimpleGUI as sg
 import sounddevice as sd
-import whisper
-from transformers import pipeline
+import soundfile as sf
 class AudioRecorder:
     """Record system audio using sounddevice loopback."""
     def __init__(self, samplerate: int = 16000, channels: int = 1):
@@ -49,8 +48,10 @@ class AudioRecorder:
 def transcribe_and_summarize(audio: np.ndarray, samplerate: int, downloads: str):
     """Transcribe audio with Whisper and summarize with transformers."""
     with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as wav_file:
-        sd.write(wav_file.name, audio, samplerate)
+        sf.write(wav_file.name, audio, samplerate)
         wav_path = wav_file.name
+    import whisper  # defer heavy imports until needed
+    from transformers import pipeline
     model = whisper.load_model("base")
     result = model.transcribe(wav_path)
     transcript = result["text"].strip()
@@ -96,4 +97,6 @@ def main():
                 print(f"Error: {exc}")
     window.close()
 if __name__ == "__main__":
+    import multiprocessing
+    multiprocessing.freeze_support()
     main()

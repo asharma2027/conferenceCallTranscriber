@@ -1,5 +1,6 @@
 PySimpleGUI
 sounddevice
+soundfile
 numpy
 whisper
 transformers
