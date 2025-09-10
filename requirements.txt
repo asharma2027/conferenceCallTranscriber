@@ -1,0 +1,6 @@
+PySimpleGUI
+sounddevice
+numpy
+whisper
+transformers
+torch
