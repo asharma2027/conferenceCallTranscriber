@@ -23,18 +23,9 @@ python app.py
 ## Packaging for Windows
 The app can be bundled into a standalone `.exe` that includes `numpy` and
 all other dependencies so it runs on systems without Python installed.
-Run the provided `build.bat` script or execute the equivalent commands
-below:
+Run this shit:
 ```bash
-pip install pyinstaller
-pyinstaller --noconfirm --onefile --windowed \
-  --collect-all numpy \
-  --collect-all soundfile \
-  --collect-all sounddevice \
-  --collect-all torch \
-  --collect-all whisper \
-  --collect-all transformers \
-  app.py
+python -m PyInstaller --noconfirm --onefile --windowed --collect-all numpy --collect-all soundfile --collect-all sounddevice --collect-all torch --collect-all whisper --collect-all transformers app.py
 ```
 The resulting executable appears in `dist/app.exe`; double-click it to
 launch the GUI.
