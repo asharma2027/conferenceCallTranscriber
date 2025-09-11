@@ -21,11 +21,22 @@ python app.py
 - Click **Stop Recording** to end the capture and process the transcript.
 - Generated files will be named `call transcript <DATE>.txt` and `call summary <DATE>.txt` in the Downloads folder.
 ## Packaging for Windows
-Use [PyInstaller](https://pyinstaller.org/) to build a standalone executable:
+The app can be bundled into a standalone `.exe` that includes `numpy` and
+all other dependencies so it runs on systems without Python installed.
+Run the provided `build.bat` script or execute the equivalent commands
+below:
 ```bash
 pip install pyinstaller
-pyinstaller --onefile --windowed app.py
+pyinstaller --noconfirm --onefile --windowed \
+  --collect-all numpy \
+  --collect-all soundfile \
+  --collect-all sounddevice \
+  --collect-all torch \
+  --collect-all whisper \
+  --collect-all transformers \
+  app.py
 ```
-The executable will appear in the `dist` folder as `app.exe`. Double-click it to launch the GUI.
+The resulting executable appears in `dist/app.exe`; double-click it to
+launch the GUI.
 ## Notes
 This project captures system-wide audio using loopback recording. To record audio from a specific application window, additional configuration or virtual audio routing may be required.
